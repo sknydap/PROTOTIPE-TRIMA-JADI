@@ -1,0 +1,6 @@
+{
+  "name": "Trima+ Sekuritas - TRIMA+ JADI",
+  "description": "Aplikasi investasi digital Trima+ dengan inovasi TRIMA+ JADI (Goal-Based Investment) dan Trimvestor Points AUM Growth & Loyalty Engine.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
