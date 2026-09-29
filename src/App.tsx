@@ -222,26 +222,29 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-900 text-slate-800 flex flex-col items-center justify-start sm:py-6 sm:px-4">
       {/* Top Device Bar (Only on wider screens to toggle mobile simulator frame) */}
-      <header className="hidden sm:flex items-center justify-between w-full max-w-md mb-3 px-3 text-slate-400 text-xs">
+      <header className="hidden sm:flex items-center justify-between w-full max-w-[390px] mb-2 px-1 text-slate-400 text-xs">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-          <span className="font-semibold text-slate-200">Trima+ Mobile Simulator</span>
+          <div className="flex flex-col leading-none">
+            <span className="font-bold text-slate-200 text-[11px]">Trima+ Mobile</span>
+            <span className="text-[9px] text-orange-400 font-mono font-semibold">1170 × 2532 px (Vertikal)</span>
+          </div>
         </div>
 
         <div className="flex items-center gap-1.5 bg-slate-800 p-1 rounded-lg border border-slate-700">
           <button
             onClick={() => setIsDeviceFrame(true)}
-            className={`px-2 py-1 rounded flex items-center gap-1 text-[11px] font-medium transition-colors ${
+            className={`px-2 py-1 rounded flex items-center gap-1 text-[11px] font-medium transition-colors cursor-pointer ${
               isDeviceFrame ? 'bg-orange-500 text-white shadow-xs' : 'text-slate-400 hover:text-white'
             }`}
-            title="Tampilan Frame Smartphone"
+            title="Tampilan Frame Smartphone (1170 × 2532 px Vertikal)"
           >
             <Smartphone className="w-3 h-3" />
-            <span>HP Mockup</span>
+            <span>2532×1170</span>
           </button>
           <button
             onClick={() => setIsDeviceFrame(false)}
-            className={`px-2 py-1 rounded flex items-center gap-1 text-[11px] font-medium transition-colors ${
+            className={`px-2 py-1 rounded flex items-center gap-1 text-[11px] font-medium transition-colors cursor-pointer ${
               !isDeviceFrame ? 'bg-orange-500 text-white shadow-xs' : 'text-slate-400 hover:text-white'
             }`}
             title="Tampilan Full Width"
@@ -252,22 +255,22 @@ export default function App() {
         </div>
       </header>
 
-      {/* Main Smartphone Shell Container */}
+      {/* Main Smartphone Shell Container - Exact 2532 x 1170 Vertical Resolution (390 x 844 pt @3x) */}
       <div 
         className={`w-full bg-slate-50 relative flex flex-col transition-all overflow-hidden ${
           isDeviceFrame 
-            ? 'max-w-md sm:rounded-[44px] sm:border-[10px] sm:border-slate-800 sm:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] sm:ring-1 sm:ring-slate-700 min-h-screen sm:min-h-[850px] sm:max-h-[920px]' 
+            ? 'w-[390px] max-w-[390px] h-[844px] max-h-[844px] sm:rounded-[44px] sm:border-[8px] sm:border-slate-800 sm:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] sm:ring-1 sm:ring-slate-700 aspect-[1170/2532]' 
             : 'max-w-xl rounded-2xl shadow-xl border border-slate-200 min-h-screen'
         }`}
       >
         {/* Floating Trimvestor Reward Toast */}
         {toastMessage && (
-          <div className="absolute top-10 left-4 right-4 z-50 p-2.5 rounded-xl bg-slate-900/95 text-white border border-amber-400/50 shadow-xl flex items-center gap-2.5 animate-in slide-in-from-top-2 duration-200">
-            <div className="w-7 h-7 rounded-lg bg-amber-400 text-slate-950 flex items-center justify-center shrink-0">
-              <Sparkles className="w-3.5 h-3.5 fill-slate-950" />
+          <div className="absolute top-11 left-4 right-4 z-50 p-3 rounded-2xl bg-slate-900/95 text-white border border-amber-400/50 shadow-xl flex items-center gap-2.5 animate-in slide-in-from-top-2 duration-200">
+            <div className="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center shrink-0">
+              <Sparkles className="w-4 h-4 fill-slate-950" />
             </div>
-            <div className="flex-1 text-[11px]">
-              <div className="font-extrabold text-amber-300 uppercase tracking-wider text-[8.5px]">
+            <div className="flex-1 text-xs">
+              <div className="font-extrabold text-amber-300 uppercase tracking-wider text-[9px]">
                 Trimvestor Points Update
               </div>
               <div className="font-semibold text-slate-100">{toastMessage}</div>
@@ -275,12 +278,12 @@ export default function App() {
           </div>
         )}
 
-        {/* Mobile Phone Status Bar */}
-        <div className="bg-[#FFF5ED] px-6 pt-2.5 pb-1 flex items-center justify-between text-xs font-semibold text-slate-800 shrink-0 select-none">
-          <span className="text-[12.5px] font-bold tracking-tight">9:41</span>
+        {/* Mobile Phone Status Bar for 1206 x 2622 px */}
+        <div className="bg-[#FFF5ED] px-6 pt-3 pb-1.5 flex items-center justify-between text-xs font-semibold text-slate-800 shrink-0 select-none">
+          <span className="text-[13px] font-bold tracking-tight">9:41</span>
           
-          {/* Dynamic Island */}
-          <div className="w-22 h-3.5 bg-slate-900 rounded-full hidden sm:block mx-auto -mt-1 shadow-inner" />
+          {/* Dynamic Island - iPhone 16 Pro Dimensions */}
+          <div className="w-26 h-4.5 bg-slate-950 rounded-full hidden sm:block mx-auto -mt-1 shadow-inner ring-1 ring-slate-900/20" />
 
           <div className="flex items-center gap-1.5 text-slate-800">
             <Signal className="w-3.5 h-3.5" />

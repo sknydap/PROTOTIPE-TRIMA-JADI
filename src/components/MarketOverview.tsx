@@ -68,29 +68,29 @@ export const MarketOverview: React.FC<MarketOverviewProps> = ({
   });
 
   return (
-    <div className="px-3.5 py-1.5 space-y-2.5">
+    <div className="px-4 py-2 space-y-3">
       {/* Search Input Bar */}
       <div className="relative">
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <Search className="w-3.5 h-3.5 text-slate-400" />
+        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+          <Search className="w-4 h-4 text-slate-400" />
         </div>
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Cari Saham, Reksa Dana, atau Obligasi"
-          className="w-full pl-8 pr-3 py-1.5 text-xs bg-white rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-orange-500 shadow-2xs text-slate-800 placeholder-slate-400"
+          className="w-full pl-9 pr-3.5 py-2 text-xs sm:text-sm bg-white rounded-2xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-orange-500 shadow-2xs text-slate-800 placeholder-slate-400"
         />
       </div>
 
       {/* Asset Segmented Tabs: Saham, Reksa Dana, Obligasi */}
       <div className="border-b border-slate-200/80">
-        <div className="flex gap-5 text-xs font-semibold">
+        <div className="flex gap-6 text-xs sm:text-sm font-semibold">
           {(['Saham', 'Reksa Dana', 'Obligasi'] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveAssetTab(tab)}
-              className={`pb-1.5 transition-all relative ${
+              className={`pb-2 transition-all relative cursor-pointer ${
                 activeAssetTab === tab
                   ? 'text-orange-600 font-bold'
                   : 'text-slate-500 hover:text-slate-800'
@@ -107,15 +107,15 @@ export const MarketOverview: React.FC<MarketOverviewProps> = ({
 
       {/* IHSG Market Index Card & Chart */}
       {activeAssetTab === 'Saham' && (
-        <div className="bg-white rounded-xl p-3 border border-slate-200/90 shadow-2xs">
+        <div className="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-2xs">
           <div className="flex items-start justify-between">
             <div>
-              <div className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+              <div className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <span>{IHSG_DATA.code}</span>
-                <span className="text-[10px] font-normal text-slate-400">{IHSG_DATA.name}</span>
+                <span className="text-xs font-normal text-slate-400">{IHSG_DATA.name}</span>
               </div>
-              <div className="flex items-baseline gap-2 mt-0.5">
-                <span className="text-lg font-black text-slate-900 tabular-nums font-mono">
+              <div className="flex items-baseline gap-2.5 mt-1">
+                <span className="text-xl font-black text-slate-900 tabular-nums font-mono">
                   {IHSG_DATA.current.toLocaleString('id-ID', { minimumFractionDigits: 2 })}
                 </span>
                 <span className="text-xs font-bold text-emerald-600 tabular-nums">
@@ -126,7 +126,7 @@ export const MarketOverview: React.FC<MarketOverviewProps> = ({
           </div>
 
           {/* Dynamic SVG Area Chart */}
-          <div className="mt-2 relative h-20 w-full">
+          <div className="mt-2.5 relative h-24 w-full">
             <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-full overflow-visible" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="ihsgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -140,12 +140,12 @@ export const MarketOverview: React.FC<MarketOverviewProps> = ({
           </div>
 
           {/* Timeframe Chips */}
-          <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-slate-100 overflow-x-auto no-scrollbar gap-1 text-[9px] font-semibold text-slate-600">
+          <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-100 overflow-x-auto no-scrollbar gap-1 text-[10px] font-semibold text-slate-600">
             {(['1D', '1W', '1M', '3M', 'YTD', '1Y', '3Y', '5Y', '10Y'] as const).map((tf) => (
               <button
                 key={tf}
                 onClick={() => setActiveTimeframe(tf)}
-                className={`px-1.5 py-0.5 rounded transition-colors ${
+                className={`px-2 py-0.5 rounded-md transition-colors cursor-pointer ${
                   activeTimeframe === tf
                     ? 'bg-orange-50 text-orange-600 font-bold border border-orange-200'
                     : 'hover:text-slate-900'
@@ -157,7 +157,7 @@ export const MarketOverview: React.FC<MarketOverviewProps> = ({
           </div>
 
           {/* Market Stats Grid */}
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1 mt-2 pt-1.5 border-t border-slate-100 text-[10px]">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1 mt-2 pt-2 border-t border-slate-100 text-xs">
             <div className="flex justify-between text-slate-400">
               <span>Prev</span>
               <span className="font-semibold text-slate-700 tabular-nums">{IHSG_DATA.prev.toLocaleString('id-ID', { minimumFractionDigits: 2 })}</span>
@@ -308,71 +308,71 @@ export const MarketOverview: React.FC<MarketOverviewProps> = ({
       )}
 
       {/* Mini Quick Access Pills: Trima+ Picks, Running Trade, Broker Ranking - Senada Colors */}
-      <div className="grid grid-cols-3 gap-1.5">
+      <div className="grid grid-cols-3 gap-2">
         <button
           onClick={() => onOpenQuickMenu('picks')}
-          className="flex items-center justify-between p-2 bg-orange-50/70 rounded-xl border border-orange-200/60 hover:bg-orange-100/60 transition-colors text-left cursor-pointer shadow-2xs group"
+          className="flex items-center justify-between p-2.5 bg-orange-50/70 rounded-2xl border border-orange-200/60 hover:bg-orange-100/60 transition-colors text-left cursor-pointer shadow-2xs group"
         >
-          <span className="text-[10px] font-bold text-slate-800 leading-tight">Trima+<br />Picks</span>
-          <div className="w-5.5 h-5.5 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center">
-            <TrendingUp className="w-3 h-3" />
+          <span className="text-xs font-bold text-slate-800 leading-tight">Trima+<br />Picks</span>
+          <div className="w-7 h-7 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
+            <TrendingUp className="w-4 h-4" />
           </div>
         </button>
 
         <button
           onClick={() => onOpenQuickMenu('running-trade')}
-          className="flex items-center justify-between p-2 bg-white rounded-xl border border-slate-200/70 hover:border-orange-200 hover:bg-orange-50/30 transition-colors text-left cursor-pointer shadow-2xs group"
+          className="flex items-center justify-between p-2.5 bg-white rounded-2xl border border-slate-200/80 hover:border-orange-200 hover:bg-orange-50/30 transition-colors text-left cursor-pointer shadow-2xs group"
         >
-          <span className="text-[10px] font-bold text-slate-800 leading-tight">Running<br />Trade</span>
-          <div className="w-5.5 h-5.5 rounded-lg bg-slate-100 text-slate-600 group-hover:text-orange-600 flex items-center justify-center">
-            <Clock className="w-3 h-3" />
+          <span className="text-xs font-bold text-slate-800 leading-tight">Running<br />Trade</span>
+          <div className="w-7 h-7 rounded-xl bg-slate-100 text-slate-600 group-hover:text-orange-600 flex items-center justify-center shrink-0">
+            <Clock className="w-4 h-4" />
           </div>
         </button>
 
         <button
           onClick={() => onOpenQuickMenu('broker-ranking')}
-          className="flex items-center justify-between p-2 bg-white rounded-xl border border-slate-200/70 hover:border-orange-200 hover:bg-orange-50/30 transition-colors text-left cursor-pointer shadow-2xs group"
+          className="flex items-center justify-between p-2.5 bg-white rounded-2xl border border-slate-200/80 hover:border-orange-200 hover:bg-orange-50/30 transition-colors text-left cursor-pointer shadow-2xs group"
         >
-          <span className="text-[10px] font-bold text-slate-800 leading-tight">Broker<br />Ranking</span>
-          <div className="w-5.5 h-5.5 rounded-lg bg-slate-100 text-slate-600 group-hover:text-orange-600 flex items-center justify-center">
-            <BarChart3 className="w-3 h-3" />
+          <span className="text-xs font-bold text-slate-800 leading-tight">Broker<br />Ranking</span>
+          <div className="w-7 h-7 rounded-xl bg-slate-100 text-slate-600 group-hover:text-orange-600 flex items-center justify-center shrink-0">
+            <BarChart3 className="w-4 h-4" />
           </div>
         </button>
       </div>
 
       {/* 1 IPO Active Card - Senada Palette */}
-      <div className="bg-white rounded-xl p-2.5 border border-slate-200/80 shadow-2xs">
-        <div className="flex items-center justify-between mb-1.5">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+      <div className="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-2xs">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
+            <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
             <span>1 IPO Tersedia</span>
-            <ChevronRight className="w-3 h-3 text-slate-400" />
+            <ChevronRight className="w-4 h-4 text-slate-400" />
           </div>
-          <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-orange-50 text-orange-700 font-semibold border border-orange-200/50">
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 font-semibold border border-orange-200/50">
             {ACTIVE_IPO.status}
           </span>
         </div>
 
-        <div className="flex items-center justify-between pt-0.5">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-orange-500/10 text-orange-600 flex items-center justify-center font-bold text-xs">
+        <div className="flex items-center justify-between pt-1">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-orange-500/10 text-orange-600 flex items-center justify-center font-bold text-sm">
               ⇄
             </div>
             <div>
-              <div className="text-xs font-bold text-slate-900 leading-none">{ACTIVE_IPO.code}</div>
-              <div className="text-[10px] text-slate-500 mt-0.5 leading-none">{ACTIVE_IPO.company}</div>
+              <div className="text-sm font-bold text-slate-900 leading-tight">{ACTIVE_IPO.code}</div>
+              <div className="text-xs text-slate-500 mt-0.5 leading-tight">{ACTIVE_IPO.company}</div>
             </div>
           </div>
 
           <div className="text-right">
-            <div className="text-xs font-bold text-slate-900 tabular-nums font-mono leading-none">
+            <div className="text-sm font-bold text-slate-900 tabular-nums font-mono leading-tight">
               {ACTIVE_IPO.priceRange}
             </div>
-            <div className="text-[9px] text-slate-400 mt-0.5 leading-none">Harga Penawaran</div>
+            <div className="text-[10px] text-slate-400 mt-0.5 leading-tight">Harga Penawaran</div>
           </div>
         </div>
 
-        <div className="mt-2 pt-1.5 border-t border-slate-100 flex items-center justify-between text-[9.5px] text-slate-500">
+        <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
           <span>Periode: {ACTIVE_IPO.dates}</span>
           <span className="text-orange-600 font-bold cursor-pointer hover:underline">
             Pesan E-IPO &rarr;
@@ -381,28 +381,28 @@ export const MarketOverview: React.FC<MarketOverviewProps> = ({
       </div>
 
       {/* Most Active Section with filters */}
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <h4 className="text-xs font-bold text-slate-900">Most Active</h4>
+          <h4 className="text-sm font-bold text-slate-900">Most Active</h4>
           <button 
             onClick={() => onOpenQuickMenu('all-stocks')}
-            className="text-[10.5px] font-semibold text-orange-600 hover:text-orange-700 flex items-center gap-0.5 cursor-pointer"
+            className="text-xs font-semibold text-orange-600 hover:text-orange-700 flex items-center gap-0.5 cursor-pointer"
           >
             <span>Lihat Semua</span>
-            <ChevronRight className="w-3 h-3" />
+            <ChevronRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
         {/* Filter Pills */}
-        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar pb-0.5 text-[10px]">
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5 text-xs">
           {(['Gainer', 'Loser', 'Value', 'Volume', 'Frequency'] as const).map((filter) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-2.5 py-0.5 rounded-full whitespace-nowrap transition-colors cursor-pointer ${
+              className={`px-3 py-1 rounded-full whitespace-nowrap transition-colors cursor-pointer ${
                 activeFilter === filter
                   ? 'bg-orange-50 text-orange-600 font-bold border border-orange-200'
-                  : 'bg-white text-slate-600 border border-slate-200/80 hover:border-slate-300'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
               }`}
             >
               {filter}
@@ -411,31 +411,31 @@ export const MarketOverview: React.FC<MarketOverviewProps> = ({
         </div>
 
         {/* Stock Rows */}
-        <div className="bg-white rounded-xl divide-y divide-slate-100 border border-slate-200/80 shadow-2xs overflow-hidden">
+        <div className="bg-white rounded-2xl divide-y divide-slate-100 border border-slate-200 shadow-2xs overflow-hidden">
           {filteredStocks.slice(0, 5).map((stock) => {
             const isPositive = stock.change >= 0;
             return (
               <div 
                 key={stock.code}
-                className="p-2.5 flex items-center justify-between hover:bg-slate-50/80 transition-colors cursor-pointer"
+                className="p-3 flex items-center justify-between hover:bg-slate-50/80 transition-colors cursor-pointer"
               >
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <span className="text-xs font-bold text-slate-900 font-mono">{stock.code}</span>
+                    <span className="text-sm font-bold text-slate-900 font-mono">{stock.code}</span>
                   </div>
-                  <div className="text-[10px] text-slate-500 truncate max-w-[140px] sm:max-w-[180px]">
+                  <div className="text-xs text-slate-500 truncate max-w-[140px] sm:max-w-[200px] mt-0.5">
                     {stock.name}
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <div className="text-xs font-bold text-slate-900 tabular-nums font-mono leading-none">
+                  <div className="text-sm font-bold text-slate-900 tabular-nums font-mono leading-tight">
                     {formatRupiah(stock.price)}
                   </div>
-                  <div className={`text-[9.5px] font-semibold tabular-nums flex items-center justify-end gap-0.5 mt-0.5 leading-none ${
+                  <div className={`text-xs font-semibold tabular-nums flex items-center justify-end gap-0.5 mt-0.5 leading-tight ${
                     isPositive ? 'text-emerald-600' : 'text-rose-600'
                   }`}>
-                    {isPositive ? <ArrowUp className="w-2.5 h-2.5" /> : <ArrowDown className="w-2.5 h-2.5" />}
+                    {isPositive ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />}
                     <span>{isPositive ? '+' : ''}{stock.change} ({formatPercent(stock.changePercent)})</span>
                   </div>
                 </div>
